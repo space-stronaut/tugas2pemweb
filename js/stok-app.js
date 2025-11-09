@@ -112,5 +112,13 @@ createApp({
                     catatanHTML : ""
                 }
             }
+        },
+        watch : {
+            stok: {
+                handler() {
+                    alert("Stok berubah")
+                },
+                deep : true
+            }
         }
 }).mount('#app');
