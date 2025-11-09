@@ -83,9 +83,34 @@ createApp({
                     qty = 0
                 }
                 this.stok[this.input.index].qty = qty
+
+                this.input = {
+                    index : 0,
+                    kode : "",
+                    judul : "",
+                    kategori : "",
+                    upbjj : "",
+                    lokasiRak : "",
+                    harga : 0,
+                    qty : 0,
+                    safety : 0,
+                    catatanHTML : ""
+                }
             },
             addData() {
                 this.stok.unshift(this.input)
+                this.input = {
+                    index : 0,
+                    kode : "",
+                    judul : "",
+                    kategori : "",
+                    upbjj : "",
+                    lokasiRak : "",
+                    harga : 0,
+                    qty : 0,
+                    safety : 0,
+                    catatanHTML : ""
+                }
             }
         }
 }).mount('#app');
