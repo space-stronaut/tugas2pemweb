@@ -69,11 +69,11 @@ createApp({
                     nama: this.input.nama,
                     status: "Dipesan",
                     ekspedisi: this.input.ekspedisi,
-                    tanggalKirim: date.getFullYear() + "-" + date.getMonth() + "-" + (date.getDate() + 1),
+                    tanggalKirim: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
                     paket: this.input.paket,
                     total: this.input.harga,
                     perjalanan: [
-                        { waktu: date.getFullYear() + "-" + date.getMonth() + "-" + (date.getDate() + 1) + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), keterangan: "Penerimaan di Loket: "+ this.input.upbjj}
+                        { waktu: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), keterangan: "Penerimaan di Loket: "+ this.input.upbjj}
                     ]
                 };
 

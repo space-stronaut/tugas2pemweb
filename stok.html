@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SITTA - Stok</title>
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
@@ -30,9 +31,13 @@
 </nav>
     <div class="container">
         <div id="app">
-            <button class="btn btn-primary" @click="clickShowAddForm">
-                {{ showAddForm ? 'Close Add Form' : 'Add Data'}}
-            </button>
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary" @click="clickShowAddForm">
+                        {{ showAddForm ? 'Close Add Form' : 'Add Data'}}
+                    </button>
+                </div>
+            </div>
 
             <div class="card mt-10" v-show="showAddForm">
                 
@@ -94,47 +99,54 @@
                 </div>
             </div>
 
+            <div class="card">
+                <div class="card-header">
+                    Info Stok
+                </div>
+                <div class="card-body">
+                    <table class="table mt-10">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>UPBJJ</th>
+                                <th>Lokasi Rak</th>
+                                <th>Harga</th>
+                                <th>QTY</th>
+                                <th>Safety</th>
+                                <th>Notes</th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody v-for="(s,i) in stok" :key="s.kode">
+                            <tr>
+                                <td v-text="s.kode"></td>
+                                <td v-text="s.judul"></td>
+                                <td v-text="s.kategori"></td>
+                                <td v-text="s.upbjj"></td>
+                                <td v-text="s.lokasiRak"></td>
+                                <td v-text="s.harga"></td>
+                                <td v-text="s.qty"></td>
+                                <td v-text="s.safety"></td>
+                                <td v-html="s.catatanHTML"></td>
+                                <td>
+                                    <span class="badge text-bg-success" v-if="s.qty >= s.safety">Aman</span>
+                                    <span class="badge text-bg-warning" v-else-if="s.qty < s.safety && s.qty != 0">Menipis</span>
+                                    <span class="badge text-bg-danger" v-else-if="s.qty == 0">Kosong</span>
+                                </td>
+                                <td>
+                                    <button @click="editStok(s, i)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Stok</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-            <table class="table mt-10">
-                <thead>
-                    <tr>
-                        <th>Kode</th>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>UPBJJ</th>
-                        <th>Lokasi Rak</th>
-                        <th>Harga</th>
-                        <th>QTY</th>
-                        <th>Safety</th>
-                        <th>Notes</th>
-                        <th>
-                            Status
-                        </th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody v-for="(s,i) in stok" :key="s.kode">
-                    <tr>
-                        <td v-text="s.kode"></td>
-                        <td v-text="s.judul"></td>
-                        <td v-text="s.kategori"></td>
-                        <td v-text="s.upbjj"></td>
-                        <td v-text="s.lokasiRak"></td>
-                        <td v-text="s.harga"></td>
-                        <td v-text="s.qty"></td>
-                        <td v-text="s.safety"></td>
-                        <td v-html="s.catatanHTML"></td>
-                        <td>
-                            <span class="badge text-bg-success" v-if="s.qty >= s.safety">Aman</span>
-                            <span class="badge text-bg-warning" v-else-if="s.qty < s.safety && s.qty != 0">Menipis</span>
-                            <span class="badge text-bg-danger" v-else-if="s.qty == 0">Kosong</span>
-                        </td>
-                        <td>
-                            <button @click="editStok(s, i)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Stok</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
