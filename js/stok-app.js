@@ -9,7 +9,8 @@ createApp({
           kategoriBoolean : false,
           filter : {
             upbjj : "",
-            kategori : ""
+            kategori : "",
+            status : ""
           },
           input : {
             index : 0,
@@ -142,12 +143,24 @@ createApp({
             filteredStok() {
                 return this.stok.filter(e => {
                     if (this.filter.upbjj == "") {
-                        // this.kategoriBoolean = false
+                        this.kategoriBoolean = false
                         return e
                     } else if(this.filter.upbjj != "" && this.filter.kategori == "") {
                         this.kategoriBoolean = true
                         return e
                     }
+
+                    if (this.filter.status == "Aman") {
+                        this.kategoriBoolean = true
+                        return e.upbjj == this.filter.upbjj && e.kategori == this.filter.kategori && e.qty >= e.safety
+                    } else if (this.filter.status == "Menipis") {
+                        this.kategoriBoolean = true
+                        return e.upbjj == this.filter.upbjj && e.kategori == this.filter.kategori && e.qty < e.safety && e.qty != 0
+                    } else if (this.filter.status == "Kosong"){
+                        this.kategoriBoolean = true
+                        return e.upbjj == this.filter.upbjj && e.kategori == this.filter.kategori && e.qty == 0
+                    }
+
                     this.kategoriBoolean = true
                     return e.upbjj == this.filter.upbjj && e.kategori == this.filter.kategori
                 })
