@@ -69,11 +69,11 @@ createApp({
                     nama: this.input.nama,
                     status: "Dipesan",
                     ekspedisi: this.input.ekspedisi,
-                    tanggalKirim: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+                    tanggalKirim: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
                     paket: this.input.paket,
                     total: this.input.harga,
                     perjalanan: [
-                        { waktu: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), keterangan: "Penerimaan di Loket: "+ this.input.upbjj}
+                        { waktu: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), keterangan: "Penerimaan di Loket: "+ this.input.upbjj}
                     ]
                 };
 
@@ -87,8 +87,16 @@ createApp({
                 }
                 this.showAddForm = false
             },
-            clickAddForm(){
+            clickShowAddForm(){
                 this.showAddForm = !this.showAddForm
+            }
+        },
+        watch : {
+            tracking: {
+                handler() {
+                    alert("Tracking baru ditambahkan!")
+                },
+                deep : true
             }
         }
 }).mount('#app');

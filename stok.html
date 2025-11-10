@@ -32,10 +32,37 @@
     <div class="container">
         <div id="app">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <button class="btn btn-primary" @click="clickShowAddForm">
                         {{ showAddForm ? 'Close Add Form' : 'Add Data'}}
                     </button>
+                    <button class="btn btn-warning ml-5" @click="clickShowFilter">
+                        {{ filterForm ? 'Close filter form' : "Filter" }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="card mt-10" v-show="filterForm">
+                
+                <div class="card-header">
+                    Filter Form
+                </div>
+                <div class="card-body">
+                    <select  class="form-control mb-3" v-model="filter.upbjj">
+                        <option value="">-- Select UPBJJ --</option>
+                        <option v-for="u in upbjjList" :value="u">
+                            {{u}}
+                        </option>
+                    </select>
+
+                    <select id="" class="form-control" v-model="filter.kategori" v-show="kategoriBoolean" required>
+                            <option value="">-- Select Category --</option>
+                            <option v-for="k in kategoriList" :value="k">
+                                {{k}}
+                            </option>
+                        </select>
+
+                    <!-- {{filter.upbjj}} -->
                 </div>
             </div>
 
@@ -122,7 +149,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody v-for="(s,i) in stok" :key="s.kode">
+                        <tbody v-for="(s,i) in filteredStok" :key="s.kode">
                             <tr>
                                 <td v-text="s.kode"></td>
                                 <td v-text="s.judul"></td>

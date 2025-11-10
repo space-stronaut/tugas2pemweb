@@ -3,8 +3,14 @@ createApp({
     data() {
         return {
           showAddForm : false,
+          filterForm : false,
           upbjjList: ["Jakarta", "Surabaya", "Makassar", "Padang", "Denpasar"],
           kategoriList: ["MK Wajib", "MK Pilihan", "Praktikum", "Problem-Based"],
+          kategoriBoolean : false,
+          filter : {
+            upbjj : "",
+            kategori : ""
+          },
           input : {
             index : 0,
             kode : "",
@@ -69,6 +75,9 @@ createApp({
             clickShowAddForm(){
                 this.showAddForm = !this.showAddForm
             },
+            clickShowFilter() {
+                this.filterForm = !this.filterForm
+            },
             editStok(s, i) {
                 this.input.index=i
                 this.input.kode=s.kode
@@ -127,6 +136,21 @@ createApp({
                     alert("Stok berubah")
                 },
                 deep : true
+            }
+        },
+        computed : {
+            filteredStok() {
+                return this.stok.filter(e => {
+                    if (this.filter.upbjj == "") {
+                        // this.kategoriBoolean = false
+                        return e
+                    } else if(this.filter.upbjj != "" && this.filter.kategori == "") {
+                        this.kategoriBoolean = true
+                        return e
+                    }
+                    this.kategoriBoolean = true
+                    return e.upbjj == this.filter.upbjj && e.kategori == this.filter.kategori
+                })
             }
         }
 }).mount('#app');
