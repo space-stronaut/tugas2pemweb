@@ -26,6 +26,13 @@ createApp({
                 this.tracking[noDo].perjalanan.forEach(e => {
                     this.detailPerjalanan.push(e)
                 })
+            },
+            checkTest() {
+                let date = new Date();
+                let year = date.getFullYear()
+                let sequence = (Number(Object.keys(this.tracking)[Object.keys(this.tracking).length - 1].split('-')[1])+ 1).toString()
+                // console.log(sequence.padStart(4, '0'))
+                console.log("DO" + year + "-" + sequence.padStart(4, '0'))
             }
         }
 }).mount('#app');

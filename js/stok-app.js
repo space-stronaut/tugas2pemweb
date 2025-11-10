@@ -2,6 +2,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+          showAddForm : false,
           upbjjList: ["Jakarta", "Surabaya", "Makassar", "Padang", "Denpasar"],
           kategoriList: ["MK Wajib", "MK Pilihan", "Praktikum", "Problem-Based"],
           input : {
@@ -65,6 +66,9 @@ createApp({
         }
       },
         methods : {
+            clickShowAddForm(){
+                this.showAddForm = !this.showAddForm
+            },
             editStok(s, i) {
                 this.input.index=i
                 this.input.kode=s.kode
@@ -96,6 +100,8 @@ createApp({
                     safety : 0,
                     catatanHTML : ""
                 }
+
+                this.showAddForm = false
             },
             addData() {
                 this.stok.unshift(this.input)
@@ -111,6 +117,8 @@ createApp({
                     safety : 0,
                     catatanHTML : ""
                 }
+
+                this.showAddForm = false
             }
         },
         watch : {

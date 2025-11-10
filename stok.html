@@ -30,8 +30,11 @@
 </nav>
     <div class="container">
         <div id="app">
+            <button class="btn btn-primary" @click="clickShowAddForm">
+                {{ showAddForm ? 'Close Add Form' : 'Add Data'}}
+            </button>
 
-            <div class="card mt-10">
+            <div class="card mt-10" v-show="showAddForm">
                 
                 <div class="card-header">
                     Tambah Data Bahan Ajar
