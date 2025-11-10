@@ -2,6 +2,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+          showAddForm : false,
           upbjjList: ["Jakarta", "Surabaya", "Makassar", "Padang", "Denpasar"],
           kategoriList: ["MK Wajib", "MK Pilihan", "Praktikum", "Problem-Based"],
           pengirimanList: [
@@ -75,6 +76,19 @@ createApp({
                         { waktu: date.getFullYear() + "-" + date.getMonth() + "-" + (date.getDate() + 1) + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), keterangan: "Penerimaan di Loket: "+ this.input.upbjj}
                     ]
                 };
+
+                this.input = {
+                    nim : "",
+                    nama : "",
+                    ekspedisi : "",
+                    paket : "",
+                    harga : 0,
+                    upbjj : ""
+                }
+                this.showAddForm = false
+            },
+            clickAddForm(){
+                this.showAddForm = !this.showAddForm
             }
         }
 }).mount('#app');
