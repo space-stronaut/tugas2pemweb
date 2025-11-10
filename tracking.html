@@ -35,6 +35,53 @@
             </button>
             <div class="card">
                 <div class="card-header">
+                    Create DO
+                </div>
+                <div class="card-body">
+                    <form @submit.prevent="addData">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">NIM</label>
+                        <input type="text" v-model="input.nim" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Nama</label>
+                        <input type="text" v-model="input.nama" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Ekspedisi</label>
+                        <select id="" class="form-control" v-model="input.ekspedisi" required>
+                            <option value="">-- Pilih Ekspedisi --</option>
+                            <option v-for="u in pengirimanList" :value="u.kode">
+                                {{u.nama}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">UPBJJ</label>
+                        <select id="" class="form-control" v-model="input.upbjj" required>
+                            <option value="">-- Pilih UPBJJ --</option>
+                            <option v-for="u in upbjjList" :value="u">
+                                {{u}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Paket</label>
+                        <select id="" class="form-control" v-model="input.paket" required>
+                            <option value="">-- Pilih Paket --</option>
+                            <option v-for="u in paket" :value="u.kode">
+                                {{u.kode}} - {{u.harga}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
                     Tracking Delivery Order
                 </div>
                 <div class="card-body">
