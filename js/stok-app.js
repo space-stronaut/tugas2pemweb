@@ -4,6 +4,7 @@ createApp({
         return {
           showAddForm : false,
           filterForm : false,
+          showSortForm : false,
           upbjjList: ["Jakarta", "Surabaya", "Makassar", "Padang", "Denpasar"],
           kategoriList: ["MK Wajib", "MK Pilihan", "Praktikum", "Problem-Based"],
           kategoriBoolean : false,
@@ -11,6 +12,10 @@ createApp({
             upbjj : "",
             kategori : "",
             status : ""
+          },
+          sort : {
+            column : "",
+            options : ""
           },
           input : {
             index : 0,
@@ -79,6 +84,9 @@ createApp({
             clickShowFilter() {
                 this.filterForm = !this.filterForm
             },
+            clickShowSort(){
+                this.showSortForm = !this.showSortForm
+            },
             editStok(s, i) {
                 this.input.index=i
                 this.input.kode=s.kode
@@ -141,7 +149,7 @@ createApp({
         },
         computed : {
             filteredStok() {
-                return this.stok.filter(e => {
+                let items = this.stok.filter(e => {
                     if (this.filter.upbjj == "") {
                         this.kategoriBoolean = false
                         return e
@@ -164,6 +172,30 @@ createApp({
                     this.kategoriBoolean = true
                     return e.upbjj == this.filter.upbjj && e.kategori == this.filter.kategori
                 })
+
+                if (this.sort.column !== "" && this.sort.column != 'judul') {
+                    if (this.sort.option == "asc") {
+                        items.sort((a,b) => {
+                            return a[this.sort.column] - b[this.sort.column]
+                        })   
+                    } else if(this.sort.option == "desc"){
+                        items.sort((a,b) => {
+                            return b[this.sort.column] - a[this.sort.column]
+                        }) 
+                    } 
+                } else if (this.sort.column !== "" && this.sort.column == 'judul') {
+                    if (this.sort.option == "asc") {
+                        items.sort((a,b) => {
+                            return a[this.sort.column].localeCompare(b[this.sort.column])
+                        })   
+                    } else if(this.sort.option == "desc"){
+                        items.sort((a,b) => {
+                            return b[this.sort.column].localeCompare(a[this.sort.column])
+                        }) 
+                    } 
+                }
+
+                return items
             }
         }
 }).mount('#app');
